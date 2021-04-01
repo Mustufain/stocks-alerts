@@ -1,0 +1,5 @@
+.idea/
+stocks_alerting/logs/
+stocks_alerting/__pycache__
+stocks_alerting/utils/__pycache__/
+
