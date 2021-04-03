@@ -12,8 +12,8 @@ clean:
 test: .virtualenv
 	(. .virtualenv/bin/activate; \
 	pycodestyle --max-line-length=79 stocks_alerting test; \
-	nosetests --with-coverage --cover-tests --cover-min-percentage=80 --cover-package=stocks_alerting test)
+	nosetests test --with-coverage --cover-tests --cover-min-percentage=80 --cover-package=stocks_alerting)
 
-build: test clean
+build: test
 
 .PHONY: test clean

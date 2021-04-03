@@ -5,16 +5,10 @@ This job runs every hour
 """
 import os
 import requests
-from stocks_alerting.utils.spark_funcs import init_spark
-from stocks_alerting.utils.utils import read_json
+from stocks_alerting.utils import utils
+from stocks_alerting.utils import spark_funcs
 ACCESS_KEY = os.environ['ACCESS_KEY']
 DIR = os.getcwd()
-
-
-def get_json():
-    path = os.path.join(DIR, 'stocks_alerting/tickers.json')
-    json_data = read_json(path)
-    return json_data
 
 
 def get_stocks_data(tickers_list):
@@ -29,10 +23,18 @@ def get_stocks_data(tickers_list):
     return api_response
 
 
-def extract():
-    json_data = get_json()
-    tickers_list = list(json_data.keys())
+def get_company_data():
+    return
+
+
+def extract(spark, path):
+
+    tickers = utils.read_json(path)
+    tickers_list = list(tickers.keys())
     response = get_stocks_data(tickers_list)
+    json_string = response['data']
+    stocks_data = spark_funcs.read_json(spark, json_string)
+    stocks_data.show()
 
 
 def transform():
@@ -50,3 +52,8 @@ def load():
     """
     return
 
+
+if __name__ == '__main__':
+    spark = spark_funcs.start_spark()
+    path = os.path.join(DIR, 'stocks_alerting/tickers.json')
+    extract(spark, path)

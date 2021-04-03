@@ -1,0 +1,14 @@
+{
+
+      "AAPL": {
+        "name": "Apple Inc",
+        "threshold_buy_price": 120.99,
+        "threshold_sell_price": 144.00
+      },
+      "PLTR": {
+        "name": "Palantir Technologies Inc",
+        "threshold_buy_price": 21.09,
+        "threshold_sell_price": 42.66
+      }
+
+}
